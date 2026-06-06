@@ -2,20 +2,13 @@ import React, { useState } from "react";
 import { WORKFLOW_TEMPLATES } from "../data";
 import { 
   Workflow, 
-  ArrowRight, 
   Play, 
-  CheckCircle2, 
   Loader2, 
   Copy, 
   Download, 
-  User, 
-  BookOpen, 
   AlertCircle,
-  HelpCircle,
-  Clock,
-  Menu
+  Bookmark
 } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
 
 export default function WorkflowStudio() {
   const [selectedWorkflow, setSelectedWorkflow] = useState(WORKFLOW_TEMPLATES[0]);
@@ -130,20 +123,20 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
   };
 
   return (
-    <div id="workflow-root" className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div id="workflow-root" className="grid grid-cols-1 lg:grid-cols-12 gap-8 animate-fade-in">
       {/* LEFT CONTROL COLUMN */}
       <div className="lg:col-span-4 flex flex-col space-y-4">
         
         {/* Choose Persona Pipeline Card */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
-          <div className="flex items-center space-x-2 text-amber-500">
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs space-y-4">
+          <div className="flex items-center space-x-2 text-red-600">
             <Workflow className="w-5 h-5" />
-            <span className="font-mono text-xs uppercase tracking-wider font-semibold">NotebookLM Pipelines</span>
+            <span className="font-mono text-xs uppercase tracking-wider font-bold">NotebookLM Pipelines</span>
           </div>
-          <h3 className="font-sans font-medium text-white text-md">
+          <h3 className="font-sans font-bold text-slate-850 text-md">
             Dây chuyền Học liệu liên kết (Chương 12)
           </h3>
-          <p className="text-slate-400 text-xs leading-relaxed">
+          <p className="text-slate-500 text-xs leading-relaxed">
             Thay vì tạo đơn lẻ từng mục, quy trình phối hợp tự động liên kết dữ liệu giúp tạo ra một bộ đồng bộ giáo khoa từ lý thuyết đến thực hành bám sát bối cảnh.
           </p>
 
@@ -161,13 +154,13 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
                   }}
                   className={`p-3 border rounded-xl cursor-pointer transition-all text-xs ${
                     selected
-                      ? "bg-slate-850 border-amber-500 shadow"
-                      : "bg-slate-950/60 border-slate-900 hover:bg-slate-900 hover:border-slate-800"
+                      ? "bg-red-50/45 border-red-500 shadow-xs"
+                      : "bg-slate-50 border-slate-100 hover:bg-slate-100"
                   }`}
                 >
-                  <p className="font-mono text-[9px] text-amber-400 font-semibold">{wf.role}</p>
-                  <h4 className="font-sans font-bold text-slate-100 mt-1">{wf.title}</h4>
-                  <p className="text-slate-400 text-[10px] mt-1 line-clamp-1">{wf.target}</p>
+                  <p className="font-mono text-[9px] text-red-700 font-bold">{wf.role}</p>
+                  <h4 className="font-sans font-bold text-slate-800 mt-1">{wf.title}</h4>
+                  <p className="text-slate-500 text-[10px] mt-1 line-clamp-1">{wf.target}</p>
                 </div>
               );
             })}
@@ -175,8 +168,8 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
         </div>
 
         {/* Input Text Form */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm space-y-4">
-          <h4 className="font-sans font-medium text-white text-sm">
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs space-y-4">
+          <h4 className="font-sans font-bold text-slate-800 text-sm">
             Nạp Giáo tài thô / Nguyên lý cần liên kết
           </h4>
           <textarea
@@ -184,11 +177,11 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
             placeholder="Dán đề cương giáo trình, bài đo kiểm kỹ thuật, nội quy an toàn xưởng..."
             value={lectureText}
             onChange={(e) => setLectureText(e.target.value)}
-            className="w-full bg-slate-800 border border-slate-700/80 rounded-lg p-2.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-red-550"
           />
 
           {errorMsg && (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-3 rounded-lg flex items-start space-x-2 text-xs">
+            <div className="bg-red-50 border border-red-200 text-red-650 p-3 rounded-lg flex items-start space-x-2 text-xs">
               <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
               <span>{errorMsg}</span>
             </div>
@@ -198,7 +191,7 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
             type="button"
             onClick={handleRunPipeline}
             disabled={isProcessing}
-            className="w-full py-2.5 px-4 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 disabled:opacity-50 text-slate-950 font-bold rounded-lg text-xs flex items-center justify-center space-x-2 cursor-pointer transition-transform"
+            className="w-full py-2.5 px-4 bg-gradient-to-r from-red-600 to-red-750 hover:from-red-650 hover:to-red-800 disabled:opacity-50 text-white font-bold rounded-lg text-xs flex items-center justify-center space-x-2 cursor-pointer transition-all shadow-sm shadow-red-100"
           >
             {isProcessing ? (
               <>
@@ -207,7 +200,7 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
               </>
             ) : (
               <>
-                <Play className="w-3.5 h-3.5 fill-slate-950 stroke-none" />
+                <Play className="w-3.5 h-3.5 fill-white stroke-none" />
                 <span>Khởi động dây chuyền liên học liệu</span>
               </>
             )}
@@ -220,8 +213,8 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
       <div className="lg:col-span-8 flex flex-col space-y-5">
         
         {/* Workflow steps diagram */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-sm">
-          <h4 className="font-mono text-xs font-semibold text-slate-350 uppercase tracking-wider mb-3">
+        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs">
+          <h4 className="font-mono text-xs font-bold text-slate-600 uppercase tracking-wider mb-3">
             Sơ đồ chu trình liên kết: {selectedWorkflow.title}
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
@@ -230,16 +223,16 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
               return (
                 <div key={i} className="flex flex-col space-y-2 relative z-10">
                   <div className="flex items-center space-x-2">
-                    <span className={`w-6 h-6 rounded-full font-mono text-xs font-semibold flex items-center justify-center shrink-0 ${
+                    <span className={`w-6 h-6 rounded-full font-mono text-xs font-bold flex items-center justify-center shrink-0 ${
                       completed
-                        ? "bg-green-500 text-slate-950"
-                        : "bg-slate-800 text-slate-400"
+                        ? "bg-red-600 text-white"
+                        : "bg-slate-100 text-slate-400"
                     }`}>
                       {i + 1}
                     </span>
                     <span className="text-[10px] text-slate-400 font-mono tracking-tight uppercase">Bước {i + 1}</span>
                   </div>
-                  <h5 className="font-sans font-medium text-slate-100 text-xs leading-snug">
+                  <h5 className="font-sans font-semibold text-slate-800 text-xs leading-snug">
                     {st}
                   </h5>
                 </div>
@@ -249,20 +242,20 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
         </div>
 
         {/* Render Results step by step tabs */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-sm flex-1 min-h-[400px] flex flex-col">
+        <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-xs flex-1 min-h-[400px] flex flex-col">
           {isProcessing ? (
             <div className="flex flex-col items-center justify-center space-y-4 py-20 flex-1">
-              <Loader2 className="w-10 h-10 animate-spin text-amber-500" />
+              <Loader2 className="w-10 h-10 animate-spin text-red-600" />
               <div className="text-center">
-                <p className="text-sm font-semibold text-white">Đang thực thi các bước phối hợp...</p>
-                <p className="text-xs text-slate-400 mt-1">Dây chuyền đang viết kịch bản, bảng biểu, trắc nghiệm liên kết tự động.</p>
+                <p className="text-sm font-bold text-slate-800">Đang thực thi các bước phối hợp...</p>
+                <p className="text-xs text-slate-500 mt-1">Dây chuyền đang viết kịch bản, bảng biểu, trắc nghiệm liên kết tự động.</p>
               </div>
             </div>
           ) : Object.keys(pipelineResults).length > 0 ? (
             <div className="flex-1 flex flex-col">
               
               {/* Steppers Tab Headers */}
-              <div className="flex border-b border-slate-800 overflow-x-auto pb-1 mb-4 gap-1.5">
+              <div className="flex border-b border-slate-200 overflow-x-auto pb-1.5 mb-4 gap-1.5">
                 {selectedWorkflow.steps.map((st, i) => {
                   const isActive = currentActiveStep === i;
                   return (
@@ -270,10 +263,10 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
                       key={i}
                       type="button"
                       onClick={() => setCurrentActiveStep(i)}
-                      className={`text-xs px-3.5 py-2.5 rounded-lg border font-medium whitespace-nowrap cursor-pointer transition-colors ${
+                      className={`text-xs px-3.5 py-2.5 rounded-lg border font-semibold whitespace-nowrap cursor-pointer transition-colors ${
                         isActive
-                          ? "bg-amber-500 border-amber-500 text-slate-950 font-bold"
-                          : "bg-slate-850 hover:bg-slate-800 border-slate-800 text-slate-400 hover:text-slate-200"
+                          ? "bg-red-600 border-red-600 text-white font-bold shadow-xs shadow-red-100"
+                          : "bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-550 hover:text-slate-850"
                       }`}
                     >
                       B.{i + 1}: {st.split(" - ")[0].split(" (")[0].substring(0, 20)}...
@@ -283,18 +276,18 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
               </div>
 
               {/* Individual step preview header actions */}
-              <div className="bg-slate-950 p-4 rounded-xl border border-slate-850 flex-1 flex flex-col justify-between">
+              <div className="bg-slate-50/50 p-4 rounded-xl border border-slate-200 flex-1 flex flex-col justify-between">
                 
                 {/* Visual Step title */}
-                <div className="border-b border-slate-800 pb-2 mb-3 flex items-center justify-between">
-                  <span className="text-xs font-mono text-amber-400 font-semibold tracking-wide">
+                <div className="border-b border-slate-200 pb-2 mb-3 flex items-center justify-between">
+                  <span className="text-xs font-mono text-red-700 font-bold tracking-wide">
                     Học liệu xuất ra cho: {selectedWorkflow.steps[currentActiveStep]}
                   </span>
                   <div className="flex items-center space-x-2">
                     <button
                       type="button"
                       onClick={copyStepContent}
-                      className="p-1.5 hover:bg-slate-800 text-slate-400 hover:text-white rounded transition-colors"
+                      className="p-1.5 hover:bg-slate-200 text-slate-450 hover:text-slate-750 rounded transition-colors cursor-pointer"
                       title="Sao chép nội dung bước này"
                     >
                       <Copy className="w-3.5 h-3.5" />
@@ -302,7 +295,7 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
                     <button
                       type="button"
                       onClick={downloadStepContent}
-                      className="p-1.5 hover:bg-slate-800 text-slate-400 hover:text-white rounded transition-colors"
+                      className="p-1.5 hover:bg-slate-200 text-slate-450 hover:text-slate-750 rounded transition-colors cursor-pointer"
                       title="Tải tệp .md của bước này"
                     >
                       <Download className="w-3.5 h-3.5" />
@@ -311,24 +304,24 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
                 </div>
 
                 {/* Styled text block */}
-                <div className="text-xs lg:text-sm text-slate-200/90 whitespace-pre-line leading-relaxed overflow-y-auto max-h-[350px] font-sans pr-1">
+                <div className="text-xs lg:text-sm text-slate-700 whitespace-pre-line leading-relaxed overflow-y-auto max-h-[350px] font-sans pr-1">
                   {pipelineResults[currentActiveStep] ? (
                     pipelineResults[currentActiveStep].split("\n").map((line, lIdx) => {
                       if (line.trim().startsWith("#")) {
-                        return <h4 key={lIdx} className="text-amber-500 font-sans font-semibold mt-3 mb-1.5">{line.replace(/#/g, "").trim()}</h4>;
+                        return <h4 key={lIdx} className="text-red-600 font-sans font-bold mt-3 mb-1.5">{line.replace(/#/g, "").trim()}</h4>;
                       }
                       if (line.trim().startsWith("- ") || line.trim().startsWith("* ")) {
-                        return <li key={lIdx} className="list-disc pl-4 py-0.5 text-slate-300">{line.substring(2)}</li>;
+                        return <li key={lIdx} className="list-disc pl-4 py-0.5 text-slate-600">{line.substring(2)}</li>;
                       }
-                      return <p key={lIdx} className="text-slate-350 min-h-[14px]">{line}</p>;
+                      return <p key={lIdx} className="text-slate-650 min-h-[14px]">{line}</p>;
                     })
                   ) : (
-                    <span className="text-slate-500 italic block">Đang nạp dữ liệu bước này...</span>
+                    <span className="text-slate-400 italic block">Đang nạp dữ liệu bước này...</span>
                   )}
                 </div>
 
                 {/* Footer advice */}
-                <div className="border-t border-slate-850 pt-3 mt-4 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                <div className="border-t border-slate-200 pt-3 mt-4 flex items-center justify-between text-[10px] text-slate-500 font-mono">
                   <span>Trường Cao đẳng Nghề Bách khoa Hà Nội</span>
                   <span>Chu kỳ liên thông 2026</span>
                 </div>
@@ -337,10 +330,10 @@ Hãy biên tập thành sản phẩm tương ứng với các phân đoạn sau 
 
             </div>
           ) : (
-            <div className="flex flex-col items-center justify-center text-center py-24 text-slate-500 flex-1">
-              <Workflow className="w-12 h-12 text-slate-800 mb-3" />
-              <h4 className="font-sans font-semibold text-slate-400 text-sm">Chưa khởi chạy</h4>
-              <p className="text-slate-500 text-xs mt-1 max-w-xs">
+            <div className="flex flex-col items-center justify-center text-center py-24 text-slate-400 flex-1">
+              <Bookmark className="w-12 h-12 text-slate-300 mb-3" />
+              <h4 className="font-sans font-bold text-slate-500 text-sm">Chưa khởi chạy</h4>
+              <p className="text-slate-400 text-xs mt-1 max-w-xs font-semibold">
                 Vui lòng bổ sung Giáo kịch thô và click "Khởi động dây chuyền liên học liệu" ở bảng điều khiển bên trái để tạo sản phẩm liên kết đồng bộ.
               </p>
             </div>
