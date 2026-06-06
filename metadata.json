@@ -1,0 +1,6 @@
+{
+  "name": "HACTECH NotebookLM Course Builder",
+  "description": "Công cụ đồng bộ hỗ trợ Giáo viên Trường Cao đẳng Nghề Bách khoa Hà Nội xây dựng học liệu theo cẩm nang NotebookLM 2026.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
